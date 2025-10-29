@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Chatbot Widget</title>
+  <link rel="stylesheet" href="frontend/widget.css" />
+</head>
+<body>
+  <!-- ...existing content... -->
+
+  <div class="ai-chat-widget">
+    <button class="ai-chat-button" aria-label="Open chat widget">💬</button>
+  </div>
+
+  <div class="ai-chat-container" aria-live="polite" aria-hidden="true">
+    <div class="ai-chat-header">
+      <div class="header-content">
+        <span class="ai-logo">🤖</span>
+        <strong>AI Assistant</strong>
+      </div>
+      <button class="ai-chat-close" aria-label="Close chat">✕</button>
+    </div>
+
+    <div class="ai-chat-messages" id="aiChatMessages">
+      <div class="ai-chat-message bot">Hi! How can I help you today?</div>
+    </div>
+
+    <div class="ai-chat-input">
+      <input id="aiMessageInput" type="text" placeholder="Type your message..." autocomplete="off" />
+      <button id="aiSendBtn" aria-label="Send message">➤</button>
+    </div>
+
+    <div class="ai-chat-footer">
+      <i>✨</i><span>Ask me anything</span>
+    </div>
+  </div>
+
+  <script src="frontend/widget.js" defer></script>
+</body>
+</html>

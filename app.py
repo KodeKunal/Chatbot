@@ -10,12 +10,22 @@ CORS(app)  # Enable CORS for all routes
 client = genai.Client(api_key=" ")  # Replace with your valid API key
 chatbot = Chatbot(client)
 
-@app.route('/chat', methods=['POST'])
+@app.route('/chat', methods=['GET', 'POST'])
 def chat():
-    data = request.get_json()
-    message = data.get('message', '')
-    reply = chatbot.handle_message(message)
-    return jsonify({'reply': reply})
+    try:
+        if request.method == 'POST':
+            data = request.get_json(silent=True) or {}
+            message = data.get('message', '')
+        else:
+            message = request.args.get('message', '')
+
+        if not message:
+            return jsonify({'error': 'Missing "message"'}), 400
+
+        reply = chatbot.handle_message(message)
+        return jsonify({'reply': reply})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(port=3000, debug=True)
