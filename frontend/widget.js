@@ -1,6 +1,7 @@
 class AIChatWidget {
     constructor(config = {}) {
-        this.apiUrl = config.apiUrl || 'http://localhost:3000/chat';
+        this.apiUrl = config.apiUrl || document.body.dataset.apiUrl || '/chat';
+        this.apiKey = config.apiKey || document.body.dataset.apiKey || '';
         this.position = config.position || 'right';
         this.theme = config.theme || '#2196f3';
         this.init();
@@ -76,7 +77,7 @@ class AIChatWidget {
                 const response = await fetch(this.apiUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message })
+                    body: JSON.stringify({ message, apiKey: this.apiKey, prompt: message, query: message, text: message })
                 });
 
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
